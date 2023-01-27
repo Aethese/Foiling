@@ -1,6 +1,7 @@
 import foiling, os
 os.system('cls' if os.name=='nt' else 'clear')
 
+print('Running foiling version', foiling.__version__)
 failed = 0
 
 if foiling._filter_input('(1, 7) * (4, 8)') == '(1,7)(4,8)':
