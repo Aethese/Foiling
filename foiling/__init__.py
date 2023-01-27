@@ -3,7 +3,7 @@ foils a number. doesn't work with algebraic expressions
 that include letters YET
 '''
 
-__version__ = '0.9.0'
+__version__ = '0.10.0'
 
 class IncorrectInput(Exception):
 	'''incorrect raw input is passed'''
@@ -101,14 +101,14 @@ def foil(equation: str) -> float:
 	filtered_equation: tuple = _filter_input(equation)
 
 	# first number in the first coord
-	first_num1 = int(filtered_equation[0][1])
+	first_num1 = int(filtered_equation[0].split(',')[0][1:])
 	# second number in the first coord
-	second_num1 = int(filtered_equation[0][3])
+	second_num1 = int(filtered_equation[0].split(',')[1][:-1])
 
 	# first number in the second coord
-	first_num2 = int(filtered_equation[1][1])
+	first_num2 = int(filtered_equation[1].split(',')[0][1:])
 	# second number in the second coord
-	second_num2 = int(filtered_equation[1][3])
+	second_num2 = int(filtered_equation[1].split(',')[1][:-1])
 
 	foiled_one = (first_num1 * first_num2) + (first_num1 * second_num2)
 	foiled_two = (second_num1 * first_num2) + (second_num1 * second_num2)
