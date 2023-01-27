@@ -107,9 +107,9 @@ def foil(equation: str) -> float:
 	second_nums_split: tuple = second_nums.split(',')
 
 	# first coord
-	#                                   all numbers past (
+	#                                    v   all numbers past (
 	first_num1 = int(first_nums_split[0][1:])
-	#                   all numbers ahead of )
+	#              all numbers ahead of )   v
 	second_num1 = int(first_nums_split[1][:-1])
 
 	# second coord
