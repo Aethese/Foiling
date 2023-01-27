@@ -4,10 +4,11 @@ os.system('cls' if os.name=='nt' else 'clear')
 print('Running foiling version', foiling.__version__)
 failed = 0
 
-if foiling._filter_input('(1, 7) * (4, 8)') == '(1,7)(4,8)':
+filtered_input = foiling._filter_input('(1, 7) * (4, 8)')
+if filtered_input == '(1,7)(4,8)':
 	print('Test 1 passed')
 else:
-	print('Test 1 failed!')
+	print('Test 1 failed! Got %s expected %s' % (filtered_input, '(1,7)(4,8)'))
 	failed += 1
 
 
