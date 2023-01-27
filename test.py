@@ -27,8 +27,8 @@ else:
 
 
 if failed >= 1:
-	print(f'{failed} tests failed!')
+	print(f'\n{failed} tests failed!')
 	os._exit(1)
 else:
-	print('All tests passed!')
+	print('\nAll tests passed!')
 	os._exit(0)
