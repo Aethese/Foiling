@@ -3,7 +3,7 @@ foils a number. doesn't work with algebraic expressions
 that include letters YET
 '''
 
-__version__ = '0.10.0'
+__version__ = '1.0.0'
 
 class IncorrectInput(Exception):
 	'''incorrect raw input is passed'''
