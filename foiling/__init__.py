@@ -102,6 +102,7 @@ def foil(equation: str) -> float:
 	filtered_equation: tuple = _filter_input(equation)
 	first_nums: str = filtered_equation[0]  # str of first nums
 	second_nums: str = filtered_equation[1]
+	# nums will look like this: (X,Y)
 	first_nums_split: tuple = first_nums.split(',')  # tuple of first nums
 	second_nums_split: tuple = second_nums.split(',')
 
