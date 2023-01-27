@@ -1,10 +1,15 @@
-__version__ = '0.0.1'
+'''
+foils a number. doesn't work with algebraic expressions
+that include letters YET
+'''
+
+__version__ = '0.9.0'
 
 class IncorrectInput(Exception):
 	'''incorrect raw input is passed'''
 	pass
 
-def _filter_input(raw_input: str) -> str:
+def _filter_input(raw_input: str) -> tuple:
 	'''
 	filters the input. the input will look something like
 	this: `(3, 4) * (2, 6)`  what i need to change this to
@@ -15,11 +20,15 @@ def _filter_input(raw_input: str) -> str:
 	raw_input : str
 		input given by the user. will look something like
 		this: `(3, 4) * (2, 6)`
+
+	Returns
+	-------
+	(first_coord, second_coord) : tuple
+		returns a tuple with the first coord (str) is stored
+		in the first position, while the second coord (str)
+		is stored in the second position
 	'''
 	#=- start doing checks before we filter -=#
-	if not isinstance(raw_input, str):
-		return TypeError('Input must be a string')
-
 	if '(' not in raw_input:
 		raise IncorrectInput('No coordinates found in raw input')
 
@@ -76,4 +85,32 @@ def _filter_input(raw_input: str) -> str:
 		split = second_coord.split(' ')
 		second_coord = split[0] + split[1]
 
-	return f'{first_coord}{second_coord}'
+	return (first_coord, second_coord)
+
+
+def foil(equation: str) -> float:
+	'''
+	foils an equation. the equation given will look
+	like this unfiltered: `(3, 4) * (2, 6)`. the end
+	goal is to return a float of that equation being
+	foiled
+	'''
+	if not isinstance(equation, str):
+		raise ValueError('Equation must be a string')
+
+	filtered_equation: tuple = _filter_input(equation)
+
+	# first number in the first coord
+	first_num1 = int(filtered_equation[0][1])
+	# second number in the first coord
+	second_num1 = int(filtered_equation[0][3])
+
+	# first number in the second coord
+	first_num2 = int(filtered_equation[1][1])
+	# second number in the second coord
+	second_num2 = int(filtered_equation[1][3])
+
+	foiled_one = (first_num1 * first_num2) + (first_num1 * second_num2)
+	foiled_two = (second_num1 * first_num2) + (second_num1 * second_num2)
+
+	return float(foiled_one + foiled_two)
