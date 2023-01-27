@@ -31,4 +31,4 @@ if failed >= 1:
 	os._exit(1)
 else:
 	print('\nAll tests passed!')
-	os._exit(0)
+	os._exit(1)
