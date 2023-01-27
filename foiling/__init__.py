@@ -99,16 +99,20 @@ def foil(equation: str) -> float:
 		raise ValueError('Equation must be a string')
 
 	filtered_equation: tuple = _filter_input(equation)
+	first_nums: str = filtered_equation[0]  # str of first nums
+	second_nums: str = filtered_equation[1]
+	first_nums_split: tuple = first_nums.split(',')  # tuple of first nums
+	second_nums_split: tuple = second_nums.split(',')
 
-	# first number in the first coord
-	first_num1 = int(filtered_equation[0].split(',')[0][1:])
-	# second number in the first coord
-	second_num1 = int(filtered_equation[0].split(',')[1][:-1])
+	# first coord
+	#                                   all numbers past (
+	first_num1 = int(first_nums_split[0][1:])
+	#                   all numbers ahead of )
+	second_num1 = int(first_nums_split[1][:-1])
 
-	# first number in the second coord
-	first_num2 = int(filtered_equation[1].split(',')[0][1:])
-	# second number in the second coord
-	second_num2 = int(filtered_equation[1].split(',')[1][:-1])
+	# second coord
+	first_num2 = int(second_nums_split[0][1:])
+	second_num2 = int(second_nums_split[1][:-1])
 
 	foiled_one = (first_num1 * first_num2) + (first_num1 * second_num2)
 	foiled_two = (second_num1 * first_num2) + (second_num1 * second_num2)
