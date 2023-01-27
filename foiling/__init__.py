@@ -1,6 +1,7 @@
 '''
-foils a number. doesn't work with algebraic expressions
-that include letters YET
+foils a number like `(3, 4) * (2, 6)`
+
+doesn't work with algebraic expressions that include letters YET
 '''
 
 __version__ = '1.0.0'
