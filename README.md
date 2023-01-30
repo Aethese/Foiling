@@ -8,4 +8,4 @@ There are a number of limitations to this project as of this time (v2.0.0-b1). C
 This branch is where algebra is being attempted to be supported. The code here most likely won't work as intended.
 
 # Challenge
-This project was a challenge between a friend and I. His repo can be found [here](https://github.com/RedThunder1/FoilingProject)
+This project was a challenge between a friend and I. His repo can be found at [RedThunder1/FoilingProject](https://github.com/RedThunder1/FoilingProject)
