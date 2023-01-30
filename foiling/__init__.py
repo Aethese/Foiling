@@ -98,6 +98,13 @@ def foil(equation: str) -> float:
 	like this unfiltered: `(3, 4) * (2, 6)`. the end
 	goal is to return a float of that equation being
 	foiled
+
+	Returns
+	-------
+	foiled_value : float
+		returns a float value if not an algebra equations
+	algebra_foiled_value : str
+		returns a string of the foiled value
 	'''
 	if not isinstance(equation, str):
 		raise ValueError('Equation must be a string')
