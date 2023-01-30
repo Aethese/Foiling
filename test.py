@@ -12,17 +12,27 @@ else:
 	failed += 1
 
 equation = foiling.foil('(1, 5) *(3,8)')
-if equation == 66.0:
+solved_value = 66.0
+if equation == solved_value:
 	print('Test 2 passed')
 else:
-	print('Test 2 failed! Got %s expected %s' % (equation, '66.0'))
+	print('Test 2 failed! Got %s expected %s' % (equation, str(solved_value)))
 	failed += 1
 
 equation = foiling.foil('(13, 15) *(13,28)')
-if equation == 1148.0:
+solved_value = 1148.0
+if equation == solved_value:
 	print('Test 3 passed')
 else:
-	print('Test 3 failed! Got %s expected %s' % (equation, '1148.0'))
+	print('Test 3 failed! Got %s expected %s' % (equation, str(solved_value)))
+	failed += 1
+
+algebra_equation = foiling.foil('(3x+2) * (x+7)')
+solved_value = f'3x\N{SUPERSCRIPT TWO}+23x+14'
+if algebra_equation == solved_value:
+	print('Test 4 passed')
+else:
+	print('Test 4 failed! Got %s expected %s' % (algebra_equation, solved_value))
 	failed += 1
 
 
