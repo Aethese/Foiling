@@ -1,14 +1,17 @@
 '''
-foils a number like `(3, 4) * (2, 6)`
-
-doesn't work with algebraic expressions that include letters YET
+foils a number like `(3, 4) * (2, 6)`. please read
+through the limitations of this project on the README
+under the `Limitations` subheader
 '''
 
-__version__ = '1.0.0'
+__version__ = '2.0.0-b1'
+SQUARED = f'\N{SUPERSCRIPT TWO}'  # ^2
+
 
 class IncorrectInput(Exception):
 	'''incorrect raw input is passed'''
 	pass
+
 
 def _filter_input(raw_input: str) -> tuple:
 	'''
