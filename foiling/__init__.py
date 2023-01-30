@@ -5,7 +5,7 @@ under the `Limitations` subheader
 '''
 
 __version__ = '2.0.0-b1'
-SUBSCRIPT = f'\N{SUPERSCRIPT TWO}'  # ^2
+SUPERSCRIPT = f'\N{SUPERSCRIPT TWO}'  # ^2
 
 
 class IncorrectInput(Exception):
