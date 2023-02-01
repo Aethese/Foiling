@@ -153,5 +153,5 @@ cython_debug/
 
 # mac moment
 .DS_Store
-# a test file of mine
+# all of my test files
 dev_test.*
