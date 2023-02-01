@@ -5,7 +5,8 @@ under the `Limitations` subheader
 '''
 
 __version__ = '2.0.0-b1'
-SUPERSCRIPT = f'\N{SUPERSCRIPT TWO}'  # ^2
+SUPERSCRIPT_TWO = f'\N{SUPERSCRIPT TWO}'      # ^2
+SUPERSCRIPT_THREE = f'\N{SUPERSCRIPT THREE}'  # ^3
 
 
 class IncorrectInput(Exception):
@@ -16,8 +17,8 @@ class IncorrectInput(Exception):
 def _filter_input(raw_input: str) -> tuple:
 	'''
 	filters the input. the input will look something like
-	this: `(3, 4) * (2, 6)`  what i need to change this to
-	is: `(3,4)(2,6)`
+	this: `(3, 4) * (2, 6)` or `(3 + 4) * (2 + 6)`  what i need to change this to
+	is: `(3+4)(2+6)`
 
 	Parameters
 	----------
@@ -92,6 +93,16 @@ def _filter_input(raw_input: str) -> tuple:
 	return (first_coord, second_coord)
 
 
+def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
+	'''
+	foils an equation except for algebraic expressions
+
+	example dict for all numbers are as defined:
+	{NUMBER(str), HAS_X(bool), SUPERSCRIPT(int)}
+	'''
+	...
+
+
 def foil(equation: str) -> float:
 	'''
 	foils an equation. the equation given will look
@@ -109,12 +120,20 @@ def foil(equation: str) -> float:
 	if not isinstance(equation, str):
 		raise ValueError('Equation must be a string')
 
+	algebra_equation = False
+	if 'x' in equation: algebra_equation = True  # only look for x (at least for now)
+
 	filtered_equation: tuple = _filter_input(equation)
 	first_nums: str = filtered_equation[0]  # str of first nums
 	second_nums: str = filtered_equation[1]
+
 	# nums will look like this: (X,Y)
 	first_nums_split: tuple = first_nums.split(',')  # tuple of first nums
 	second_nums_split: tuple = second_nums.split(',')
+
+	if algebra_equation:  # if algebra equation just solve it all here
+		algebra_solved_value = _foil_algebra(first_nums_split, second_nums_split)
+		return algebra_solved_value
 
 	# first coord
 	#                                    v   all numbers past (
