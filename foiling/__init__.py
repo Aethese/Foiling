@@ -122,6 +122,9 @@ def foil(equation: str) -> float:
 
 	algebra_equation = False
 	if 'x' in equation: algebra_equation = True  # only look for x (at least for now)
+	if ['y', 'z', 'a', 'b'] in equation:  # no support for other vars yet
+		error_msg = 'Support for variable letters besides x are not yet supported'
+		raise IncorrectInput(error_msg)
 
 	filtered_equation: tuple = _filter_input(equation)
 	first_nums: str = filtered_equation[0]  # str of first nums
