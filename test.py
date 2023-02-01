@@ -35,7 +35,7 @@ else:
 	print('Test 4 failed! Got %s expected %s' % (equation, str(solved_value)))
 	failed += 1
 
-algebra_equation = foiling.foil('(3x+2) * (x+7)')
+algebra_equation = foiling.foil('(3x,2) * (x,7)')
 solved_value = f'3x\N{SUPERSCRIPT TWO}+23x+14'
 if algebra_equation == solved_value:
 	print('Test 5 passed')
