@@ -51,7 +51,13 @@ else:
 	print('Test 6 failed! Got %s expected %s' % (equation, solved_value))
 	failed += 1
 
-equation = foiling.foil('(1)()')
+equation = foiling.foil('(2+2)(1+1)')
+solved_value = 4.0
+if equation == solved_value:
+	print('Test 7 passed')
+else:
+	print('Test 7 failed! Got %s expected %s' % (equation, solved_value))
+	failed += 1
 
 
 if failed >= 1:
