@@ -43,6 +43,14 @@ else:
 	print('Test 5 failed! Got %s expected %s' % (algebra_equation, solved_value))
 	failed += 1
 
+equation = foiling.foil('(1.5, 0.5) (2.25, 1)')
+solved_value = 6.5
+if equation == solved_value:
+	print('Test 6 passed')
+else:
+	print('Test 6 failed! Got %s expected %s' % (equation, solved_value))
+	failed += 1
+
 
 if failed >= 1:
 	print(f'\n{failed} tests failed!')
