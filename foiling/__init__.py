@@ -93,6 +93,13 @@ def _filter_input(raw_input: str) -> tuple:
 	return (first_coord, second_coord)
 
 
+def _remove_X(full_number: str) -> int:
+	'''
+	removes the X off of a value to get the whole number
+	'''
+	...
+
+
 def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 	'''
 	foils an equation except for algebraic expressions
@@ -103,26 +110,41 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 	'''
 	# create dicts for all POSSIBLE values
 	# order of vars: (first_num1, second_num1)(first_num2, second_num2)
+	has_X: bool = lambda num_str: True if 'x' in num_str else False
+	remove_X: int = lambda num_str: int(num_str[:-1])
+
 	first_num1_NUM: str = first_nums[0][1:]
-	first_num1_X: bool = True if 'x' in first_num1_NUM else False
+	first_num1_X: bool = has_X(first_num1_NUM)
 	first_num1: dict = {'NUMBER': first_num1_NUM, 'HAS_X': first_num1_X,
 					'SUPERSCRIPT': 1}
 
 	second_num1_NUM: str = first_nums[1][:-1]
-	second_num1_X: bool = True if 'x' in second_num1_NUM else False
+	second_num1_X: bool = has_X(second_num1_NUM)
 	second_num1: dict = {'NUMBER': second_num1_NUM, 'HAS_X': second_num1_X,
 					'SUPERSCRIPT': 1}
 
 	first_num2_NUM: str = second_nums[0][1:]
-	first_num2_X: bool = True if 'x' in first_num2_NUM else False
+	first_num2_X: bool = has_X(first_num2_NUM)
 	first_num2: dict = {'NUMBER': first_num2_NUM, 'HAS_X': first_num2_X,
 					'SUPERSCRIPT': 1}
 
 	second_num2_NUM: str = second_nums[1][:-1]
-	second_num2_X: bool = True if 'x' in second_num2_NUM else False
+	second_num2_X: bool = has_X(second_num2_NUM)
 	second_num2: dict = {'NUMBER': second_num2_NUM, 'HAS_X': second_num2_X,
 					'SUPERSCRIPT': 1}
-			
+
+	# hold temp solved values here
+	# still need to combine like terms
+	TEMP_SOLVED_PROBLEM: str = ''
+
+	# first operation (first number, third number)
+	if first_num1['HAS_X']:
+		first_num1_noX: int = remove_X(first_num1['NUMBER'])
+		if first_num2['HAS_X']:
+			TEMP_SOLVED_PROBLEM += f''
+	else:  # no X in first_num1
+		if first_num2['HAS_X']:
+			first_num2_noX: int = remove_X(first_num2['NUMBER'])
 
 
 def foil(equation: str) -> float:
@@ -161,17 +183,16 @@ def foil(equation: str) -> float:
 		return algebra_solved_value
 
 	# first coord
-	#                                    v   all numbers past (
-	first_num1 = int(first_nums_split[0][1:])
-	#              all numbers ahead of )   v
-	second_num1 = int(first_nums_split[1][:-1])
+	#                         all numbers past (   v
+	first_num1: float  = float(first_nums_split[0][1:])
+	#                     all numbers ahead of )   v
+	second_num1: float = float(first_nums_split[1][:-1])
 
 	# second coord
-	first_num2 = int(second_nums_split[0][1:])
-	second_num2 = int(second_nums_split[1][:-1])
+	first_num2: float  = float(second_nums_split[0][1:])
+	second_num2: float = float(second_nums_split[1][:-1])
 
 	foiled_one = (first_num1 * first_num2) + (first_num1 * second_num2)
 	foiled_two = (second_num1 * first_num2) + (second_num1 * second_num2)
 
 	return float(foiled_one + foiled_two)
-
