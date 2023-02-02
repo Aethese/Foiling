@@ -4,7 +4,7 @@ through the limitations of this project on the README
 under the `Limitations` subheader
 '''
 
-__version__ = '2.0.0-b1'
+__version__ = '2.0.0-nightly'
 SUPERSCRIPT_TWO = f'\N{SUPERSCRIPT TWO}'      # ^2
 SUPERSCRIPT_THREE = f'\N{SUPERSCRIPT THREE}'  # ^3
 
@@ -93,10 +93,11 @@ def _filter_input(raw_input: str) -> tuple:
 		split = second_coord.split(' ')
 		second_coord = split[0] + split[1]
 
+	# replace all `+` signs to `,`
 	if '+' in first_coord:
-		first_coord.replace('+', ',')
+		first_coord = first_coord.replace('+', ',')
 	if '+' in second_coord:
-		second_coord.replace('+', ',')
+		second_coord = second_coord.replace('+', ',')
 
 	return (first_coord, second_coord)
 
