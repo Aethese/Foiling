@@ -62,7 +62,7 @@ else:
 
 if failed >= 1:
 	print(f'\n{failed} tests failed!')
-	os._exit(1)
+	exit(1)
 else:
 	print('\nAll tests passed!')
-	os._exit(0)
+	exit(0)
