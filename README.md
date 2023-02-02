@@ -1,8 +1,9 @@
 # Foiling
-Automatic foiling without any modules and with the power of Python!
+Automatic foiling without any modules and with the power of Python! Only supports multiplication! No division!
 
 ## Limitations
 There are a number of limitations to this project as of this time (v2.0.0-b1). Currently:
+* NO DIVISION! Just multiplication!
 * You can't foil with 3 or more numbers in a single pair of parentheses
 * You must use a ',' to separate your numbers, not a '+'
 * In terms of algebra, you can't have a variable besides `x`
