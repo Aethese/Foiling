@@ -99,8 +99,30 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 
 	example dict for all numbers are as defined:
 	{NUMBER(str), HAS_X(bool), SUPERSCRIPT(int)}
+	(superscript has NOT been added yet)
 	'''
-	...
+	# create dicts for all POSSIBLE values
+	# order of vars: (first_num1, second_num1)(first_num2, second_num2)
+	first_num1_NUM: str = first_nums[0][1:]
+	first_num1_X: bool = True if 'x' in first_num1_NUM else False
+	first_num1: dict = {'NUMBER': first_num1_NUM, 'HAS_X': first_num1_X,
+					'SUPERSCRIPT': 1}
+
+	second_num1_NUM: str = first_nums[1][:-1]
+	second_num1_X: bool = True if 'x' in second_num1_NUM else False
+	second_num1: dict = {'NUMBER': second_num1_NUM, 'HAS_X': second_num1_X,
+					'SUPERSCRIPT': 1}
+
+	first_num2_NUM: str = second_nums[0][1:]
+	first_num2_X: bool = True if 'x' in first_num2_NUM else False
+	first_num2: dict = {'NUMBER': first_num2_NUM, 'HAS_X': first_num2_X,
+					'SUPERSCRIPT': 1}
+
+	second_num2_NUM: str = second_nums[1][:-1]
+	second_num2_X: bool = True if 'x' in second_num2_NUM else False
+	second_num2: dict = {'NUMBER': second_num2_NUM, 'HAS_X': second_num2_X,
+					'SUPERSCRIPT': 1}
+			
 
 
 def foil(equation: str) -> float:
@@ -152,3 +174,4 @@ def foil(equation: str) -> float:
 	foiled_two = (second_num1 * first_num2) + (second_num1 * second_num2)
 
 	return float(foiled_one + foiled_two)
+
