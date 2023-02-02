@@ -6,6 +6,7 @@ under the `Limitations` subheader
 
 __version__ = '2.0.0-nightly'
 
+SUPERSCRIPT_ONE   = f'\N{SUPERSCRIPT ONE}'    # ^1
 SUPERSCRIPT_TWO   = f'\N{SUPERSCRIPT TWO}'    # ^2
 SUPERSCRIPT_THREE = f'\N{SUPERSCRIPT THREE}'  # ^3
 SUPERSCRIPT_FOUR  = f'\N{SUPERSCRIPT FOUR}'   # ^4
@@ -109,6 +110,32 @@ def _filter_input(raw_input: str) -> tuple:
 	return (first_coord, second_coord)
 
 
+def _return_superscript(superscript: int) -> str:
+	'''it's not pretty, so just don't look :)'''
+	return_superscript_value = ''
+
+	if superscript == 1:
+		return_superscript_value = SUPERSCRIPT_ONE
+	elif superscript == 2:
+		return_superscript_value = SUPERSCRIPT_TWO
+	elif superscript == 3:
+		return_superscript_value = SUPERSCRIPT_THREE
+	elif superscript == 4:
+		return_superscript_value = SUPERSCRIPT_FOUR
+	elif superscript == 5:
+		return_superscript_value = SUPERSCRIPT_FIVE
+	elif superscript == 6:
+		return_superscript_value = SUPERSCRIPT_SIX
+	elif superscript == 7:
+		return_superscript_value = SUPERSCRIPT_SEVEN
+	elif superscript == 8:
+		return_superscript_value = SUPERSCRIPT_EIGHT
+	elif superscript == 9:
+		return_superscript_value = SUPERSCRIPT_NINE
+
+	return return_superscript_value
+
+
 def _remove_X(full_number: str) -> int:
 	'''
 	removes the X off of a value to get the whole number
@@ -120,11 +147,11 @@ def _remove_X(full_number: str) -> int:
 
 def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 	'''
-	foils an equation except for algebraic expressions
+	foils an equation, except for algebraic expressions
 
 	example dict for all numbers are as defined:
 	{NUMBER(str), HAS_X(bool), SUPERSCRIPT(int)}
-	(superscript has NOT been added yet)
+	(superscript is NOT being supported fully yet)
 	'''
 	# create dicts for all POSSIBLE values
 	# order of vars: (first_num1, second_num1)(first_num2, second_num2)
