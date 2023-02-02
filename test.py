@@ -52,7 +52,7 @@ else:
 	failed += 1
 
 equation = foiling.foil('(2+2)(1+1)')
-solved_value = 4.0
+solved_value = 8.0
 if equation == solved_value:
 	print('Test 7 passed')
 else:
