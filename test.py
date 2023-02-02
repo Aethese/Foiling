@@ -51,6 +51,8 @@ else:
 	print('Test 6 failed! Got %s expected %s' % (equation, solved_value))
 	failed += 1
 
+equation = foiling.foil('(1)()')
+
 
 if failed >= 1:
 	print(f'\n{failed} tests failed!')

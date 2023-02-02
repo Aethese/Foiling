@@ -20,6 +20,9 @@ def _filter_input(raw_input: str) -> tuple:
 	this: `(3, 4) * (2, 6)` or `(3 + 4) * (2 + 6)`  what i need to change this to
 	is: `(3,4)(2,6)`
 
+	TODO: better support for negative numbers if user is not using
+	`,`. works when just using `,` but that's it
+
 	Parameters
 	----------
 	raw_input : str
@@ -42,7 +45,7 @@ def _filter_input(raw_input: str) -> tuple:
 	for char in raw_input:  # see if 2 coords are passed
 		if char == '(':
 			para_count1 += 1
-		if char == ')':
+		elif char == ')':
 			para_count2 += 1
 	if para_count1 != 2 or para_count2 != 2:
 		raise IncorrectInput('Incorrect amount of coordinates passed. Limit is two')
@@ -89,6 +92,11 @@ def _filter_input(raw_input: str) -> tuple:
 	if ' ' in second_coord:
 		split = second_coord.split(' ')
 		second_coord = split[0] + split[1]
+
+	if '+' in first_coord:
+		first_coord.replace('+', ',')
+	if '+' in second_coord:
+		second_coord.replace('+', ',')
 
 	return (first_coord, second_coord)
 
