@@ -5,8 +5,15 @@ under the `Limitations` subheader
 '''
 
 __version__ = '2.0.0-nightly'
-SUPERSCRIPT_TWO = f'\N{SUPERSCRIPT TWO}'      # ^2
+
+SUPERSCRIPT_TWO   = f'\N{SUPERSCRIPT TWO}'    # ^2
 SUPERSCRIPT_THREE = f'\N{SUPERSCRIPT THREE}'  # ^3
+SUPERSCRIPT_FOUR  = f'\N{SUPERSCRIPT FOUR}'   # ^4
+SUPERSCRIPT_FIVE  = f'\N{SUPERSCRIPT FIVE}'   # ^5
+SUPERSCRIPT_SIX   = f'\N{SUPERSCRIPT SIX}'    # ^6
+SUPERSCRIPT_SEVEN = f'\N{SUPERSCRIPT SEVEN}'  # ^7
+SUPERSCRIPT_EIGHT = f'\N{SUPERSCRIPT EIGHT}'  # ^8
+SUPERSCRIPT_NINE  = f'\N{SUPERSCRIPT NINE}'   # ^9
 
 
 class IncorrectInput(Exception):
@@ -106,7 +113,9 @@ def _remove_X(full_number: str) -> int:
 	'''
 	removes the X off of a value to get the whole number
 	'''
-	...
+	if len(full_number) == 1:
+		full_number = '1' + full_number
+	return full_number[-1]
 
 
 def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
@@ -120,7 +129,6 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 	# create dicts for all POSSIBLE values
 	# order of vars: (first_num1, second_num1)(first_num2, second_num2)
 	has_X: bool = lambda num_str: True if 'x' in num_str else False
-	remove_X: int = lambda num_str: int(num_str[:-1])
 
 	first_num1_NUM: str = first_nums[0][1:]
 	first_num1_X: bool = has_X(first_num1_NUM)
@@ -147,13 +155,16 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 	TEMP_SOLVED_PROBLEM: str = ''
 
 	# first operation (first number, third number)
-	if first_num1['HAS_X']:
-		first_num1_noX: int = remove_X(first_num1['NUMBER'])
-		if first_num2['HAS_X']:
-			TEMP_SOLVED_PROBLEM += f''
+	if first_num1['HAS_X']:  # if first_num1 has an X
+		first_num1_noX: int = _remove_X(first_num1['NUMBER'])
+		if first_num2['HAS_X']:  # if first_num2 ALSO has an X
+			# since both have X we can just multiply the number and up the superscript value
+			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
+			super_script_value = first_num1['SUPERSCRIPT'] + first_num2['SUPERSCRIPT']
+			TEMP_SOLVED_PROBLEM += f'{}'
 	else:  # no X in first_num1
-		if first_num2['HAS_X']:
-			first_num2_noX: int = remove_X(first_num2['NUMBER'])
+		if first_num2['HAS_X']:  # if the second number has an X
+			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
 
 
 def foil(equation: str) -> float:
