@@ -5,7 +5,6 @@ Automatic foiling without any modules and with the power of Python! Only support
 There are a number of limitations to this project as of this time (v2.0.0-b1). Currently:
 * NO DIVISION! Just multiplication!
 * You can't foil with 3 or more numbers in a single pair of parentheses
-* You must use a ',' to separate your numbers, not a '+'
 * In terms of algebra, you can't have a variable besides `x`
 * Another limitation in terms of algebra is that you can't have a superscript with a value of 2 or higher on the `x`
 
