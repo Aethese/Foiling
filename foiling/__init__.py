@@ -114,8 +114,9 @@ def _return_superscript(superscript: int) -> str:
 	'''it's not pretty, so just don't look :)'''
 	return_superscript_value = ''
 
-	if superscript == 1:  # also could return '' here?
-		return_superscript_value = SUPERSCRIPT_ONE
+	if superscript == 1:
+		return_superscript_value = ''
+		#return_superscript_value = SUPERSCRIPT_ONE
 	elif superscript == 2:
 		return_superscript_value = SUPERSCRIPT_TWO
 	elif superscript == 3:
@@ -189,7 +190,6 @@ def _solve_algebra_foiling(TEMP_SOLVED_PROBLEM: str, first_num: dict, second_num
 			TEMP_SOLVED_PROBLEM += f'{int(first_num["NUMBER"]) * int(second_num["NUMBER"])} '
 
 	return TEMP_SOLVED_PROBLEM
-
 
 
 def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
