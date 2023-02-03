@@ -145,6 +145,53 @@ def _remove_X(full_number: str) -> int:
 	return int(full_number[:-1])
 
 
+def _solve_algebra_foiling(TEMP_SOLVED_PROBLEM: str, first_num: dict, second_num: dict) -> str:
+	'''
+	does the heavy lifting of the algebra foiling. after going
+	through a lot of checks, the multiplication shall commence B)
+
+	Parameters
+	----------
+	TEMP_SOLVED_PROBLEM : str
+		the full TEMP_SOLVED_PROBLEM just brought to the function.
+		is returned with new values after solving
+	first_num : dict
+		full first num dict
+	second_num : dict
+		full second num dict
+
+	Returns
+	-------
+	TEMP_SOLVED_PROBLEM : str
+		just returns the same value given to the function with
+		the new added solved value that was calculated
+	'''
+	if first_num['HAS_X']:  # if first_num has an X
+		first_num_noX: int = _remove_X(first_num['NUMBER'])
+		if second_num['HAS_X']:  # if second_num ALSO has an X
+			# since both have x we can just multiply the number and up the superscript value
+			second_num_noX: int = _remove_X(second_num['NUMBER'])
+
+			# since both values have an x, we have to add the superscripts
+			super_script_value = first_num['SUPERSCRIPT'] + second_num['SUPERSCRIPT']
+
+			# need space at the end of the TEMP_SOLV. because it is split by spaces
+			TEMP_SOLVED_PROBLEM += f'{first_num_noX*second_num_noX}x{super_script_value} '
+		else:  # first_num has x but second_num doesn't have x
+			super_script_value = first_num['SUPERSCRIPT']
+			TEMP_SOLVED_PROBLEM += f'{first_num_noX*int(second_num["NUMBER"])}x{super_script_value} '
+	else:  # no X in first_num
+		if second_num['HAS_X']:  # if only the second number has an X
+			second_num_noX: int = _remove_X(second_num['NUMBER'])
+			super_script_value = second_num['SUPERSCRIPT']
+			TEMP_SOLVED_PROBLEM += f'{int(first_num["NUMBER"])*second_num_noX}x{super_script_value} '
+		else:
+			TEMP_SOLVED_PROBLEM += f'{int(first_num["NUMBER"]) * int(second_num["NUMBER"])} '
+
+	return TEMP_SOLVED_PROBLEM
+
+
+
 def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 	'''
 	foils an equation, except for algebraic expressions
@@ -178,26 +225,21 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 					'SUPERSCRIPT': 1}
 
 	# hold temp solved values here
-	# still need to combine like terms
 	TEMP_SOLVED_PROBLEM: str = ''
 
 	# first operation (first number, third number)
-	if first_num1['HAS_X']:  # if first_num1 has an X
-		first_num1_noX: int = _remove_X(first_num1['NUMBER'])
-		if first_num2['HAS_X']:  # if first_num2 ALSO has an X
-			# since both have X we can just multiply the number and up the superscript value
-			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
-			# since both values have an x, i have to add the superscripts
-			super_script_value = first_num1['SUPERSCRIPT'] + first_num2['SUPERSCRIPT']
-			# need space at the end of the temp_solv. because it is split by spaces
-			TEMP_SOLVED_PROBLEM += f'{first_num1_noX*first_num2_noX}x{super_script_value} '
-		else:  # first_num1 has x but first_num2 doesn't have x
-			super_script_value = first_num1['SUPERSCRIPT']
-			TEMP_SOLVED_PROBLEM += f'{first_num1_noX*int(first_num2["NUMBER"])}x{super_script_value} '
-	else:  # no X in first_num1
-		if first_num2['HAS_X']:  # if the second number has an X
-			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
-	return TEMP_SOLVED_PROBLEM
+	TEMP_SOLVED_PROBLEM = _solve_algebra_foiling(TEMP_SOLVED_PROBLEM, first_num1, first_num2)
+
+	# second operation (first number, fourth number)
+	TEMP_SOLVED_PROBLEM = _solve_algebra_foiling(TEMP_SOLVED_PROBLEM, first_num1, second_num2)
+
+	# third operation (second number, third number)
+	TEMP_SOLVED_PROBLEM = _solve_algebra_foiling(TEMP_SOLVED_PROBLEM, second_num1, first_num2)
+
+	# fourth operation (second number, fourth number)
+	TEMP_SOLVED_PROBLEM = _solve_algebra_foiling(TEMP_SOLVED_PROBLEM, second_num1, second_num2)
+
+	return TEMP_SOLVED_PROBLEM  # still need to combine like terms
 
 
 def foil(equation: str) -> float:
