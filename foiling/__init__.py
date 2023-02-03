@@ -187,11 +187,12 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 		if first_num2['HAS_X']:  # if first_num2 ALSO has an X
 			# since both have X we can just multiply the number and up the superscript value
 			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
+			# since both values have an x, i have to add the superscripts
 			super_script_value = first_num1['SUPERSCRIPT'] + first_num2['SUPERSCRIPT']
 			# need space at the end of the temp_solv. because it is split by spaces
 			TEMP_SOLVED_PROBLEM += f'{first_num1_noX*first_num2_noX}x{super_script_value} '
 		else:  # first_num1 has x but first_num2 doesn't have x
-			super_script_value = first_num1['SUPERSCRIPT'] + first_num2['SUPERSCRIPT']
+			super_script_value = first_num1['SUPERSCRIPT']
 			TEMP_SOLVED_PROBLEM += f'{first_num1_noX*int(first_num2["NUMBER"])}x{super_script_value} '
 	else:  # no X in first_num1
 		if first_num2['HAS_X']:  # if the second number has an X
