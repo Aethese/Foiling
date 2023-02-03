@@ -114,7 +114,7 @@ def _return_superscript(superscript: int) -> str:
 	'''it's not pretty, so just don't look :)'''
 	return_superscript_value = ''
 
-	if superscript == 1:
+	if superscript == 1:  # also could return '' here?
 		return_superscript_value = SUPERSCRIPT_ONE
 	elif superscript == 2:
 		return_superscript_value = SUPERSCRIPT_TWO
@@ -142,7 +142,7 @@ def _remove_X(full_number: str) -> int:
 	'''
 	if len(full_number) == 1:
 		full_number = '1' + full_number
-	return full_number[-1]
+	return int(full_number[:-1])
 
 
 def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
@@ -188,10 +188,15 @@ def _foil_algebra(first_nums: tuple, second_nums: tuple) -> str:
 			# since both have X we can just multiply the number and up the superscript value
 			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
 			super_script_value = first_num1['SUPERSCRIPT'] + first_num2['SUPERSCRIPT']
-			TEMP_SOLVED_PROBLEM += f'{}'
+			# need space at the end of the temp_solv. because it is split by spaces
+			TEMP_SOLVED_PROBLEM += f'{first_num1_noX*first_num2_noX}x{super_script_value} '
+		else:  # first_num1 has x but first_num2 doesn't have x
+			super_script_value = first_num1['SUPERSCRIPT'] + first_num2['SUPERSCRIPT']
+			TEMP_SOLVED_PROBLEM += f'{first_num1_noX*int(first_num2["NUMBER"])}x{super_script_value} '
 	else:  # no X in first_num1
 		if first_num2['HAS_X']:  # if the second number has an X
 			first_num2_noX: int = _remove_X(first_num2['NUMBER'])
+	return TEMP_SOLVED_PROBLEM
 
 
 def foil(equation: str) -> float:
